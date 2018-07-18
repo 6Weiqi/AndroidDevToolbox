@@ -6,7 +6,7 @@
 
         <variable
             name="builder"
-            type="com.liaobd.common.base.widget.CustomDialogFragCompat.Builder" />
+            type="com.liuwq.common.base.widget.CustomDialogFragCompat.Builder" />
     </data>
 
     <FrameLayout
