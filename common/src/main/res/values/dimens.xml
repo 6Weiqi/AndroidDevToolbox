@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--Text size-->
+    <dimen name="text_size_caption">12sp</dimen>
+    <dimen name="text_size_button">14sp</dimen>
+    <dimen name="text_size_menu">14sp</dimen>
+    <dimen name="text_size_body">14sp</dimen>
+    <dimen name="text_size_subhead">16sp</dimen>
+    <dimen name="text_size_title">20sp</dimen>
+    <dimen name="text_size_headline">24sp</dimen>
+    <dimen name="text_size_display_1">34sp</dimen>
+    <dimen name="text_size_display_2">45sp</dimen>
+    <dimen name="text_size_display_3">56sp</dimen>
+    <dimen name="text_size_display_4">112sp</dimen>
+
+    <!--Spacing-->
+    <dimen name="padding_xxxs">2dp</dimen>
+    <dimen name="padding_xxs">4dp</dimen>
+    <dimen name="padding_xs">8dp</dimen>
+    <dimen name="padding_s">16dp</dimen>
+    <dimen name="padding_m">24dp</dimen>
+    <dimen name="padding_l">32dp</dimen>
+    <dimen name="padding_xl">48dp</dimen>
+    <dimen name="padding_xxl">56dp</dimen>
+    <dimen name="padding_xxxl">72dp</dimen>
+
+    <!--Elevation-->
+    <dimen name="elevation_switch">1dp</dimen>      <!--Switch-->
+    <dimen name="elevation_card_normal">2dp</dimen>      <!--Card (resting elevation) *-->
+    <dimen name="elevation_button_normal">2dp</dimen>      <!--Raised button (resting elevation)*-->
+    <dimen name="elevation_appbar">4dp</dimen>      <!--App Bar-->
+    <dimen name="elevation_fab_normal">6dp
+    </dimen>      <!--Floating action button (FAB - resting elevation)-->
+    <dimen name="elevation_snackbar">6dp</dimen>      <!--Snackbar-->
+    <dimen name="elevation_card_raised">8dp</dimen>      <!--Card (when picked up)-->
+    <dimen name="elevation_button_raised">8dp</dimen>      <!--Raised button (pressed state)-->
+    <dimen name="elevation_menu">8dp</dimen>      <!--Menu-->
+    <dimen name="elevation_bottom_navigation">8dp</dimen>      <!--Bottom navigation bar-->
+    <dimen name="elevation_submenu">9dp</dimen>      <!--Sub menu (+1dp for each sub menu)-->
+    <dimen name="elevation_fab_raised">12dp
+    </dimen>      <!--Floating action button (FAB - pressed)-->
+    <dimen name="elevation_drawer">16dp</dimen>      <!--Nav drawer、Right drawer-->
+    <dimen name="elevation_bottom_sheet">16dp</dimen>      <!--Modal bottom Sheet-->
+    <dimen name="elevation_dialog">24dp</dimen>      <!--Dialog-->
+    <dimen name="elevation_picker">24dp</dimen>      <!--Picker-->
+
+    <!--Size-->
+    <dimen name="height_divider_line">1dp</dimen>
+    <dimen name="height_divider_line_s">1px</dimen>
+    <dimen name="height_sub_header">48dp</dimen>
+
+    <dimen name="height_item_list_xxs">40dp</dimen>
+    <dimen name="height_item_list_xs">48dp</dimen>
+    <dimen name="height_item_list_s">56dp</dimen>
+    <dimen name="height_item_list_m">60dp</dimen>
+    <dimen name="height_item_list_l">72dp</dimen>
+    <dimen name="height_item_list_xl">76dp</dimen>
+    <dimen name="height_item_list_xxl">88dp</dimen>
+
+</resources>

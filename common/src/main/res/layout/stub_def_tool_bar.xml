@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="?attr/actionBarSize"
+    android:title=""
+    app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+    app:subtitleTextAppearance="@style/TextAppearance.AppCompat.Small"
+    app:subtitleTextColor="@color/textTertiary"
+    app:titleTextColor="@color/textPrimary">
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/text_size_title"
+        tools:text="Title"
+        tools:textColor="@color/textPrimary" />
+
+</android.support.v7.widget.Toolbar>
