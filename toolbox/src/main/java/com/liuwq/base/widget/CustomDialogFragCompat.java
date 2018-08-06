@@ -1,4 +1,4 @@
-package com.liuwq.common.base.widget;
+package com.liuwq.base.widget;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
