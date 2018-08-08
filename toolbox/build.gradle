@@ -5,14 +5,6 @@ group = 'com.github.6Weiqi'
 apply plugin: 'com.jfrog.bintray'
 
 android {
-//    signingConfigs {
-//        liaobdTestSigning {
-//            keyAlias KEY_ALIAS
-//            keyPassword KEY_PASSWORD
-//            storeFile file(STORE_FILE)
-//            storePassword STORE_PASSWORD
-//        }
-//    }
     compileSdkVersion gradle.compileSdkVersion
     defaultConfig {
         minSdkVersion gradle.minSdkVersion
@@ -23,13 +15,12 @@ android {
     }
     buildTypes {
         release {
-            zipAlignEnabled true
-            minifyEnabled true
+//            zipAlignEnabled true
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'),
                     'proguard-rules.pro'
         }
         debug {
-//            signingConfig signingConfigs.liaobdTestSigning
         }
     }
     dataBinding {
@@ -80,12 +71,10 @@ install {
         pom {
             project {
                 packaging POM_PACKAGING
-                // 项目描述，复制我的话，这里需要修改。
-                name POM_NAME// 可选，项目名称。
+                name POM_NAME
                 description POM_DESCRIPTION
-                url POM_URL // 项目主页，这里是引用上面定义好。
+                url POM_URL
 
-                // 软件开源协议，现在一般都是Apache License2.0吧，复制我的，这里不需要修改。
                 licenses {
                     license {
                         name POM_LICENCE_NAME
@@ -101,7 +90,6 @@ install {
                     }
                 }
 
-                // SCM，复制我的，这里不需要修改。
                 scm {
                     connection POM_SCM_CONNECTION // Git仓库地址。
                     developerConnection POM_SCM_DEV_CONNECTION // Git仓库地址。
