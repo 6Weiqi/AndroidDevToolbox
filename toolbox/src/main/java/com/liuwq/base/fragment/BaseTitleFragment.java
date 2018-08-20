@@ -15,29 +15,29 @@ import android.view.ViewStub;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
-import com.liuwq.common.R;
+import com.liuwq.base.R;
 
 /**
- * 描述: 带有标题栏fragment基类
- * 作者: su
- * 日期: 2017/10/17 14:35
+ * 描述: 带有标题栏fragment基类 作者: su 日期: 2017/10/17 14:35
  */
-
 public abstract class BaseTitleFragment extends BaseFragment {
     private static int sDefaultLeftIconRes = R.drawable.ic_arrow_back_white_24dp;
     private View mInflatedTitleView;
 
-    private final View.OnClickListener mDefaultLeftIconClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            getActivity().onBackPressed();
-        }
-    };
+    private final View.OnClickListener mDefaultLeftIconClickListener =
+            new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    getActivity().onBackPressed();
+                }
+            };
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
+    public View onCreateView(
+            LayoutInflater inflater,
+            @Nullable ViewGroup container,
+            @Nullable Bundle savedInstanceState) {
         if (mRootView == null) {
             mRootView = inflater.inflate(R.layout.frag_base_title, container, false);
 
@@ -48,8 +48,10 @@ public abstract class BaseTitleFragment extends BaseFragment {
             FrameLayout frameLayout = mRootView.findViewById(R.id.fl_content_base_title);
             View contentView = provideContentView(inflater, container, savedInstanceState);
             if (contentView != null) {
-                frameLayout.addView(provideContentView(inflater, container, savedInstanceState),
-                        new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                frameLayout.addView(
+                        provideContentView(inflater, container, savedInstanceState),
+                        new FrameLayout.LayoutParams(
+                                ViewGroup.LayoutParams.MATCH_PARENT,
                                 ViewGroup.LayoutParams.MATCH_PARENT));
             }
 
@@ -57,20 +59,20 @@ public abstract class BaseTitleFragment extends BaseFragment {
                 Toolbar defToolbar = (Toolbar) mInflatedTitleView;
                 defToolbar.setTitle("");
                 defToolbar.inflateMenu(R.menu.empty);
-                defToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
-                    @Override
-                    public boolean onMenuItemClick(MenuItem item) {
-                        return BaseTitleFragment.this.onMenuItemClick(item.getItemId(),
-                                (String) item.getTitle());
-                    }
-                });
+                defToolbar.setOnMenuItemClickListener(
+                        new Toolbar.OnMenuItemClickListener() {
+                            @Override
+                            public boolean onMenuItemClick(MenuItem item) {
+                                return BaseTitleFragment.this.onMenuItemClick(
+                                        item.getItemId(), (String) item.getTitle());
+                            }
+                        });
             }
             if (dividerLineLayoutRes() != 0) {
                 stub = mRootView.findViewById(R.id.vs_divider_line);
                 stub.setLayoutResource(dividerLineLayoutRes());
                 stub.inflate();
             }
-
         }
         return mRootView;
     }
@@ -91,7 +93,6 @@ public abstract class BaseTitleFragment extends BaseFragment {
      * @return
      */
     @LayoutRes
-
     protected int getTitleLayoutRes() {
         return R.layout.stub_def_tool_bar;
     }
@@ -154,9 +155,7 @@ public abstract class BaseTitleFragment extends BaseFragment {
         }
     }
 
-    /**
-     * 显示左侧图标
-     */
+    /** 显示左侧图标 */
     protected void showTitleIconLeft() {
         showTitleIconLeft(sDefaultLeftIconRes, mDefaultLeftIconClickListener);
     }
@@ -167,15 +166,15 @@ public abstract class BaseTitleFragment extends BaseFragment {
      * @param icon
      * @param listener
      */
-    protected void showTitleIconLeft(@Nullable Integer icon,
-                                     @Nullable View.OnClickListener listener) {
+    protected void showTitleIconLeft(
+            @Nullable Integer icon, @Nullable View.OnClickListener listener) {
         if (!defTitleLayout()) {
             return;
         }
         Toolbar toolbar = (Toolbar) mInflatedTitleView;
         toolbar.setNavigationIcon(icon == null ? sDefaultLeftIconRes : icon);
-        toolbar.setNavigationOnClickListener(listener == null ? mDefaultLeftIconClickListener
-                : listener);
+        toolbar.setNavigationOnClickListener(
+                listener == null ? mDefaultLeftIconClickListener : listener);
     }
 
     /**
@@ -203,15 +202,19 @@ public abstract class BaseTitleFragment extends BaseFragment {
     /**
      * 添加右侧菜单项
      *
-     * @param id             菜单项id
-     * @param text           菜单项文本
-     * @param icon           null表示不显示图标，显示text
-     * @param showAsAction   false将收缩至“更多”
+     * @param id 菜单项id
+     * @param text 菜单项文本
+     * @param icon null表示不显示图标，显示text
+     * @param showAsAction false将收缩至“更多”
      * @param replaceIfExist id已存在时是否覆盖
      * @return
      */
-    protected boolean addMenuItem(int id, String text, @Nullable @DrawableRes Integer icon,
-                                  boolean showAsAction, boolean replaceIfExist) {
+    protected boolean addMenuItem(
+            int id,
+            String text,
+            @Nullable @DrawableRes Integer icon,
+            boolean showAsAction,
+            boolean replaceIfExist) {
         if (!defTitleLayout()) {
             return false;
         }
@@ -231,7 +234,8 @@ public abstract class BaseTitleFragment extends BaseFragment {
             item.setIcon(icon);
         }
 
-        item.setShowAsAction(showAsAction ? MenuItem.SHOW_AS_ACTION_ALWAYS : MenuItem.SHOW_AS_ACTION_NEVER);
+        item.setShowAsAction(
+                showAsAction ? MenuItem.SHOW_AS_ACTION_ALWAYS : MenuItem.SHOW_AS_ACTION_NEVER);
 
         return true;
     }
@@ -256,6 +260,4 @@ public abstract class BaseTitleFragment extends BaseFragment {
 
         return false;
     }
-
-
 }

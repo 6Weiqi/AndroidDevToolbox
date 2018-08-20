@@ -21,35 +21,33 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
-import com.liuwq.common.R;
+import com.liuwq.base.R;
 
 import org.greenrobot.eventbus.EventBus;
 
 /**
- * 描述: Fragment基类
- * 作者: su
- * 日期: 2017/10/16 18:11
+ * 描述: Fragment基类 作者: su 日期: 2017/10/16 18:11
  */
-
 public abstract class BaseFragment extends Fragment {
     protected View mRootView;
     private boolean mFirstTimeResume = true;
     private ProgressDialog mLoadingDialog;
     private AlertDialog mConfirmDialog;
 
-    protected abstract View provideContentView(LayoutInflater inflater,
-                                               @Nullable ViewGroup container,
-                                               @Nullable Bundle savedInstanceState);
+    protected abstract View provideContentView(
+            LayoutInflater inflater,
+            @Nullable ViewGroup container,
+            @Nullable Bundle savedInstanceState);
 
-    /**
-     * You can observe something here.
-     */
+    /** You can observe something here. */
     protected abstract void onInit();
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
+    public View onCreateView(
+            LayoutInflater inflater,
+            @Nullable ViewGroup container,
+            @Nullable Bundle savedInstanceState) {
         if (mRootView == null) {
             mRootView = provideContentView(inflater, container, savedInstanceState);
         }
@@ -66,8 +64,7 @@ public abstract class BaseFragment extends Fragment {
             mFirstTimeResume = false;
 
             if (subscribeEvents()) {
-                EventBus.getDefault()
-                        .register(this);
+                EventBus.getDefault().register(this);
             }
         }
     }
@@ -77,8 +74,7 @@ public abstract class BaseFragment extends Fragment {
         super.onDestroy();
 
         if (subscribeEvents()) {
-            EventBus.getDefault()
-                    .unregister(this);
+            EventBus.getDefault().unregister(this);
         }
     }
 
@@ -92,8 +88,7 @@ public abstract class BaseFragment extends Fragment {
     }
 
     protected void postEvent(Object event) {
-        EventBus.getDefault()
-                .post(event);
+        EventBus.getDefault().post(event);
     }
 
     protected View findViewById(@IdRes int id) {
@@ -151,23 +146,24 @@ public abstract class BaseFragment extends Fragment {
         }
     }
 
-    protected void showConfirmDialog(@Nullable String msg,
-                                     @Nullable String actionPositive,
-                                     @Nullable DialogInterface.OnClickListener listenerPositive) {
-        showConfirmDialog(true, msg, actionPositive, listenerPositive, null,
-                null);
+    protected void showConfirmDialog(
+            @Nullable String msg,
+            @Nullable String actionPositive,
+            @Nullable DialogInterface.OnClickListener listenerPositive) {
+        showConfirmDialog(true, msg, actionPositive, listenerPositive, null, null);
     }
 
-    protected void showConfirmDialog(boolean cancelable, @Nullable String msg,
-                                     @Nullable String actionPositive,
-                                     @Nullable DialogInterface.OnClickListener listenerPositive,
-                                     @Nullable String actionNegative,
-                                     @Nullable DialogInterface.OnClickListener listenerNegative) {
+    protected void showConfirmDialog(
+            boolean cancelable,
+            @Nullable String msg,
+            @Nullable String actionPositive,
+            @Nullable DialogInterface.OnClickListener listenerPositive,
+            @Nullable String actionNegative,
+            @Nullable DialogInterface.OnClickListener listenerNegative) {
         hideConfirmDialog();
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext())
-                .setCancelable(cancelable)
-                .setMessage(msg);
+        AlertDialog.Builder builder =
+                new AlertDialog.Builder(getContext()).setCancelable(cancelable).setMessage(msg);
 
         if (!TextUtils.isEmpty(actionNegative)) {
             builder.setNegativeButton(actionNegative, listenerNegative);
@@ -181,17 +177,18 @@ public abstract class BaseFragment extends Fragment {
     }
 
     @SuppressLint("ResourceType")
-    protected void showConfirmDialog(boolean cancelable, @StringRes int msg,
-                                     @StringRes int positiveId,
-                                     @Nullable DialogInterface.OnClickListener listenerPositive,
-                                     @StringRes int negativeId,
-                                     @Nullable DialogInterface.OnClickListener listenerNegative,
-                                     @Nullable DialogInterface.OnDismissListener dismissListener) {
+    protected void showConfirmDialog(
+            boolean cancelable,
+            @StringRes int msg,
+            @StringRes int positiveId,
+            @Nullable DialogInterface.OnClickListener listenerPositive,
+            @StringRes int negativeId,
+            @Nullable DialogInterface.OnClickListener listenerNegative,
+            @Nullable DialogInterface.OnDismissListener dismissListener) {
         hideConfirmDialog();
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext())
-                .setCancelable(cancelable)
-                .setMessage(msg);
+        AlertDialog.Builder builder =
+                new AlertDialog.Builder(getContext()).setCancelable(cancelable).setMessage(msg);
         if (positiveId > 0) {
             builder.setPositiveButton(positiveId, listenerPositive);
         }
@@ -204,45 +201,44 @@ public abstract class BaseFragment extends Fragment {
         mConfirmDialog.show();
     }
 
-    protected void showConfirmDialog(@StringRes int msg,
-                                     @StringRes int positiveId,
-                                     @Nullable DialogInterface.OnClickListener listenerPositive) {
+    protected void showConfirmDialog(
+            @StringRes int msg,
+            @StringRes int positiveId,
+            @Nullable DialogInterface.OnClickListener listenerPositive) {
         hideConfirmDialog();
 
-        mConfirmDialog = new AlertDialog.Builder(getContext())
-                .setMessage(msg)
-                .setPositiveButton(positiveId, listenerPositive)
-                .create();
+        mConfirmDialog =
+                new AlertDialog.Builder(getContext())
+                        .setMessage(msg)
+                        .setPositiveButton(positiveId, listenerPositive)
+                        .create();
 
         mConfirmDialog.show();
     }
 
-    protected void showItemsDialog(@ArrayRes int itemsId,
-                                   DialogInterface.OnClickListener listener) {
-        new AlertDialog.Builder(getContext())
-                .setItems(itemsId, listener)
-                .show();
+    protected void showItemsDialog(
+            @ArrayRes int itemsId, DialogInterface.OnClickListener listener) {
+        new AlertDialog.Builder(getContext()).setItems(itemsId, listener).show();
     }
 
-    protected void showSingleChoiceItemsDialog(@StringRes int titleId, String[] items,
-                                               int checkedPos,
-                                               DialogInterface.OnClickListener listener) {
+    protected void showSingleChoiceItemsDialog(
+            @StringRes int titleId,
+            String[] items,
+            int checkedPos,
+            DialogInterface.OnClickListener listener) {
         new AlertDialog.Builder(getContext())
                 .setTitle(titleId)
                 .setSingleChoiceItems(items, checkedPos, listener)
                 .show();
     }
 
-    /**
-     * 关闭系统软键盘
-     */
+    /** 关闭系统软键盘 */
     protected void closeKeyboard() {
-        InputMethodManager imm = (InputMethodManager) getActivity()
-                .getSystemService(Context.INPUT_METHOD_SERVICE);
+        InputMethodManager imm =
+                (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
         if (imm != null) {
             IBinder token = getActivity().getWindow().getDecorView().getWindowToken();
             imm.hideSoftInputFromWindow(token, 0);
         }
     }
-
 }

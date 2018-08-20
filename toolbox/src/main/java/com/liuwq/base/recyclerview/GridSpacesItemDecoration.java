@@ -16,13 +16,13 @@ public class GridSpacesItemDecoration extends RecyclerView.ItemDecoration {
     }
 
     @Override
-    public void getItemOffsets(Rect outRect, View view, RecyclerView parent,
-                               RecyclerView.State state) {
+    public void getItemOffsets(
+            Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
         outRect.left = spacePx;
         outRect.right = spacePx;
-//        outRect.bottom = spacePx;
-//        if (parent.getChildAdapterPosition(view) == 0) {
+        //        outRect.bottom = spacePx;
+        //        if (parent.getChildAdapterPosition(view) == 0) {
         outRect.top = spacePx;
-//        }
+        //        }
     }
 }

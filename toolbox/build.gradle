@@ -4,6 +4,10 @@ apply plugin: 'com.github.dcendents.android-maven'
 group = 'com.github.6Weiqi'
 apply plugin: 'com.jfrog.bintray'
 
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
+
 android {
     compileSdkVersion gradle.compileSdkVersion
     defaultConfig {
@@ -99,6 +103,7 @@ install {
         }
     }
 }
+
 // 生成jar包的task，不需要修改。
 task sourcesJar(type: Jar) {
     from android.sourceSets.main.java.srcDirs

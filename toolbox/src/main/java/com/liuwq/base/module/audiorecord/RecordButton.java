@@ -19,14 +19,13 @@ import android.view.WindowManager.LayoutParams;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.liuwq.base.R;
 import com.liuwq.base.util.FileTool;
-import com.liuwq.common.R;
 
 import java.io.File;
 
 /**
- * 自定义语音按钮样式
- * (http://blog.csdn.net/zhuyb829/article/details/50071129)
+ * 自定义语音按钮样式 (http://blog.csdn.net/zhuyb829/article/details/50071129)
  *
  * @author ss
  * @version V1.0.0
@@ -36,8 +35,8 @@ import java.io.File;
 public class RecordButton extends AppCompatButton {
     private static final int WHAT_MSG_VOLUME_CHANGE = 0x123;
     private static final int WHAT_MSG_RECORDING_STOP = 0x1000;
-    private static final int MIN_INTERVAL_TIME = 1 * 1000;// 1s 最短
-    public static final int MAX_TIME = 60 * 60 * 1000 + 500;// 60分钟，最长
+    private static final int MIN_INTERVAL_TIME = 1 * 1000; // 1s 最短
+    public static final int MAX_TIME = 60 * 60 * 1000 + 500; // 60分钟，最长
     private static final int[] RES_VOLUME = {
             R.drawable.bg_mic_recording_0,
             R.drawable.bg_mic_recording_1,
@@ -48,7 +47,7 @@ public class RecordButton extends AppCompatButton {
     private static ImageView sImageView;
     private boolean mOutputMp3;
     private Context mContext;
-    private ExtAudioRecorder mAudioRecorder; //压缩的录音（WAV）
+    private ExtAudioRecorder mAudioRecorder; // 压缩的录音（WAV）
     private OnFinishedRecordListener mFinishedRecordListener;
     private static long sStartTime;
     private Dialog mRecordDialog;
@@ -57,31 +56,30 @@ public class RecordButton extends AppCompatButton {
     private File mSaveDir;
     private String mFileName = null;
     private float mTouchY;
-    private Handler mVolumeHandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            if (msg.what == WHAT_MSG_RECORDING_STOP) {
-                stopRecording();
-                mRecordDialog.dismiss();
-            } else if (msg.what == WHAT_MSG_VOLUME_CHANGE) {
-                int f = (int) msg.obj;
+    private Handler mVolumeHandler =
+            new Handler() {
+                @Override
+                public void handleMessage(Message msg) {
+                    if (msg.what == WHAT_MSG_RECORDING_STOP) {
+                        stopRecording();
+                        mRecordDialog.dismiss();
+                    } else if (msg.what == WHAT_MSG_VOLUME_CHANGE) {
+                        int f = (int) msg.obj;
 
-                Log.e("===>", f + "");
+                        Log.e("===>", f + "");
 
-                if (f < 20) {
-                    sImageView.setImageResource(RES_VOLUME[0]);
-                } else if (f < 30) {
-                    sImageView.setImageResource(RES_VOLUME[1]);
-                } else if (f < 43) {
-                    sImageView.setImageResource(RES_VOLUME[2]);
-                } else {
-                    sImageView.setImageResource(RES_VOLUME[3]);
+                        if (f < 20) {
+                            sImageView.setImageResource(RES_VOLUME[0]);
+                        } else if (f < 30) {
+                            sImageView.setImageResource(RES_VOLUME[1]);
+                        } else if (f < 43) {
+                            sImageView.setImageResource(RES_VOLUME[2]);
+                        } else {
+                            sImageView.setImageResource(RES_VOLUME[3]);
+                        }
+                    }
                 }
-
-            }
-        }
-    };
-
+            };
 
     public RecordButton(Context context) {
         super(context);
@@ -117,15 +115,16 @@ public class RecordButton extends AppCompatButton {
         mRecordDialog = new Dialog(getContext(), R.style.like_toast_dialog_style);
         sImageView = new ImageView(getContext());
         sImageView.setImageResource(RES_VOLUME[3]);
-        mRecordDialog.setContentView(sImageView, new LayoutParams(
-                ViewGroup.LayoutParams.WRAP_CONTENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT));
+        mRecordDialog.setContentView(
+                sImageView,
+                new LayoutParams(
+                        ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         mRecordDialog.setOnDismissListener(mDismissListener);
         LayoutParams lp = mRecordDialog.getWindow().getAttributes();
         lp.gravity = Gravity.CENTER;
     }
 
-//    private AnimationDrawable anim;
+    //    private AnimationDrawable anim;
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -134,19 +133,19 @@ public class RecordButton extends AppCompatButton {
         mTouchY = event.getY();
         if (mTouchY < 0) {
             sImageView.setImageResource(R.drawable.bg_slide_cancel);
-//            anim.stop();
+            //            anim.stop();
         } else {
             sImageView.setImageResource(RES_VOLUME[3]);
-//            anim = (AnimationDrawable) sImageView.getBackground();
-//            anim.start();
+            //            anim = (AnimationDrawable) sImageView.getBackground();
+            //            anim.start();
         }
 
         switch (action) {
             case MotionEvent.ACTION_DOWN:
                 setText("松开发送");
                 initDialogAndStartRecord();
-//                anim = (AnimationDrawable) sImageView.getBackground();
-//                anim.start();
+                //                anim = (AnimationDrawable) sImageView.getBackground();
+                //                anim.start();
                 break;
             case MotionEvent.ACTION_UP:
                 this.setText("按住录音");
@@ -154,7 +153,7 @@ public class RecordButton extends AppCompatButton {
                 mLast10SecondCountDownTimer.cancel(); // 主动松开时取消计时
                 if (mTouchY >= 0 && (System.currentTimeMillis() - sStartTime <= MAX_TIME)) {
                     finishRecord();
-                } else if (mTouchY < 0) {  //当手指向上滑，会cancel
+                } else if (mTouchY < 0) { // 当手指向上滑，会cancel
                     cancelRecord();
                 }
                 break;
@@ -175,15 +174,13 @@ public class RecordButton extends AppCompatButton {
         mRecordDialog.show();
     }
 
-    /**
-     * 放开手指，结束录音处理
-     */
+    /** 放开手指，结束录音处理 */
     private void finishRecord() {
         long intervalTime = System.currentTimeMillis() - sStartTime;
         if (intervalTime < MIN_INTERVAL_TIME) {
             mVolumeHandler.sendEmptyMessageDelayed(WHAT_MSG_RECORDING_STOP, 1000);
             sImageView.setImageResource(R.drawable.bg_too_short);
-//            anim.stop();
+            //            anim.stop();
             File file = new File(mFileName);
             file.delete();
             return;
@@ -191,49 +188,47 @@ public class RecordButton extends AppCompatButton {
             stopRecording();
             mRecordDialog.dismiss();
         }
-        //如果有回调，则发送录音结束回调
+        // 如果有回调，则发送录音结束回调
         if (mFinishedRecordListener != null)
             mFinishedRecordListener.onFinishedRecord(mFileName, intervalTime);
     }
 
-    /**
-     * 取消录音对话框和停止录音
-     */
+    /** 取消录音对话框和停止录音 */
     private void cancelRecord() {
         stopRecording();
         mRecordDialog.dismiss();
-        //MyToast.makeText(getContext(), "取消录音！", Toast.LENGTH_SHORT);
+        // MyToast.makeText(getContext(), "取消录音！", Toast.LENGTH_SHORT);
         File file = new File(mFileName);
         if (file.exists()) {
             file.delete();
         }
     }
 
-    /**
-     * 执行录音操作
-     */
+    /** 执行录音操作 */
     private void startRecording() {
         if (mSaveDir == null) {
             return;
         }
 
-        String fileName = new StringBuilder()
-                .append("/tmp_sound_")
-                .append(System.currentTimeMillis())
-                .append(mOutputMp3 ? ".mp3" : ".wav").toString();
+        String fileName =
+                new StringBuilder()
+                        .append("/tmp_sound_")
+                        .append(System.currentTimeMillis())
+                        .append(mOutputMp3 ? ".mp3" : ".wav")
+                        .toString();
         mFileName = new File(mSaveDir, fileName).getPath();
-        mAudioRecorder = ExtAudioRecorder.getInstance(false); //未压缩的录音（WAV）
-        //设置输出文件
+        mAudioRecorder = ExtAudioRecorder.getInstance(false); // 未压缩的录音（WAV）
+        // 设置输出文件
         mAudioRecorder.setOutputFile(mFileName);
         mAudioRecorder.prepare();
-        //开始录音
+        // 开始录音
         mAudioRecorder.start();
         mRecordCountDownTimer.start();
 
         mThread = new ObtainDecibelThread();
         mThread.start();
 
-        //震动提醒
+        // 震动提醒
         Vibrator vib = (Vibrator) getContext().getSystemService(Context.VIBRATOR_SERVICE);
         vib.vibrate(100);
     }
@@ -241,66 +236,70 @@ public class RecordButton extends AppCompatButton {
     /**
      * 录音开始计时器，允许的最大时长倒数10秒时进入倒计时
      */
-    private CountDownTimer mRecordCountDownTimer = new CountDownTimer(MAX_TIME - 500 - 10000, 1000) { // 50秒后开始倒计时
-        @Override
-        public void onFinish() {
-            mLast10SecondCountDownTimer.start();
-        }
+    private CountDownTimer mRecordCountDownTimer =
+            new CountDownTimer(MAX_TIME - 500 - 10000, 1000) { // 50秒后开始倒计时
+                @Override
+                public void onFinish() {
+                    mLast10SecondCountDownTimer.start();
+                }
 
-        @Override
-        public void onTick(long millisUntilFinished) {
-        }
-    };
-
+                @Override
+                public void onTick(long millisUntilFinished) {
+                }
+            };
 
     /**
      * 录音最后10秒倒计时器，倒计时结束发送录音
      */
-    private CountDownTimer mLast10SecondCountDownTimer = new CountDownTimer(10000, 1000) {
-        @Override
-        public void onFinish() {
-            finishRecord();
-        }
+    private CountDownTimer mLast10SecondCountDownTimer =
+            new CountDownTimer(10000, 1000) {
+                @Override
+                public void onFinish() {
+                    finishRecord();
+                }
 
-        @Override
-        public void onTick(long millisUntilFinished) { // 显示倒计时动画
-            //            switch ((int)millisUntilFinished / 1000) {
-            //                case 10:
-            //                    sImageView.setBackgroundResource(R.drawable.mic_count_10);
-            //                    break;
-            //                case 9:
-            //                    sImageView.setBackgroundResource(R.drawable.mic_count_9);
-            //                    break;
-            //                case 8:
-            //                    sImageView.setBackgroundResource(R.drawable.mic_count_8);
-            //                    break;
-            //                case 7:
-            //                    sImageView.setBackgroundResource(R.drawable.mic_count_7);
-            //                    break;
-            //                case 6:
-            //                    sImageView.setBackgroundResource(R.drawable.mic_count_6);
-            //                    break;
-            //                case 5:
-            //                    sImageView.setBackgroundResource(R.drawable.mic_count_5);
-            //                    break;
-            //                case 4:
-            //                    sImageView.setBackgroundResource(R.drawable.mic_count_4);
-            //                    break;
-            //                case 3:
-            //                    sImageView.setBackgroundResource(R.drawable.mic_count_3);
-            //                    break;
-            //                case 2:
-            //                    sImageView.setBackgroundResource(R.drawable.mic_count_2);
-            //                    break;
-            //                case 1:
-            //                    sImageView.setBackgroundResource(R.drawable.mic_count_1);
-            //                    break;
-            //            }
+                @Override
+                public void onTick(long millisUntilFinished) { // 显示倒计时动画
+                    //            switch ((int)millisUntilFinished / 1000) {
+                    //                case 10:
+                    //                    sImageView.setBackgroundResource(R.drawable.mic_count_10);
+                    //                    break;
+                    //                case 9:
+                    //                    sImageView.setBackgroundResource(R.drawable.mic_count_9);
+                    //                    break;
+                    //                case 8:
+                    //                    sImageView.setBackgroundResource(R.drawable.mic_count_8);
+                    //                    break;
+                    //                case 7:
+                    //                    sImageView.setBackgroundResource(R.drawable.mic_count_7);
+                    //                    break;
+                    //                case 6:
+                    //                    sImageView.setBackgroundResource(R.drawable.mic_count_6);
+                    //                    break;
+                    //                case 5:
+                    //                    sImageView.setBackgroundResource(R.drawable.mic_count_5);
+                    //                    break;
+                    //                case 4:
+                    //                    sImageView.setBackgroundResource(R.drawable.mic_count_4);
+                    //                    break;
+                    //                case 3:
+                    //                    sImageView.setBackgroundResource(R.drawable.mic_count_3);
+                    //                    break;
+                    //                case 2:
+                    //                    sImageView.setBackgroundResource(R.drawable.mic_count_2);
+                    //                    break;
+                    //                case 1:
+                    //                    sImageView.setBackgroundResource(R.drawable.mic_count_1);
+                    //                    break;
+                    //            }
 
-            Toast.makeText(getContext(), "还有" + ((int) millisUntilFinished / 1000) + "秒结束",
-                    Toast.LENGTH_SHORT).show();
-        }
-    };
+                    Toast.makeText(
+                            getContext(),
+                            "还有" + ((int) millisUntilFinished / 1000) + "秒结束",
+                            Toast.LENGTH_SHORT)
+                            .show();
+                }
+            };
 
     private void stopRecording() {
         if (mThread != null) {
@@ -330,16 +329,16 @@ public class RecordButton extends AppCompatButton {
         @Override
         public void run() {
             while (running) {
-//                if (recorder == null || !running) {
-//                    continue;
-//                }
+                //                if (recorder == null || !running) {
+                //                    continue;
+                //                }
 
                 if (mAudioRecorder == null) {
                     continue;
                 }
 
-//              int x = recorder.getMaxAmplitude(); //振幅
-                int x = mAudioRecorder.getMaxAmplitude();//振幅
+                //              int x = recorder.getMaxAmplitude(); //振幅
+                int x = mAudioRecorder.getMaxAmplitude(); // 振幅
                 if (x != 0 && mTouchY >= 0) {
                     int f = (int) (10 * Math.log(x) / Math.log(10));
                     Message msg = mVolumeHandler.obtainMessage();
@@ -360,15 +359,15 @@ public class RecordButton extends AppCompatButton {
                 }
             }
         }
-
     }
 
-    private OnDismissListener mDismissListener = new OnDismissListener() {
-        @Override
-        public void onDismiss(DialogInterface dialog) {
-            stopRecording();
-        }
-    };
+    private OnDismissListener mDismissListener =
+            new OnDismissListener() {
+                @Override
+                public void onDismiss(DialogInterface dialog) {
+                    stopRecording();
+                }
+            };
 
     public interface OnFinishedRecordListener {
         void onFinishedRecord(String audioPath, long durationMills);
@@ -389,8 +388,6 @@ public class RecordButton extends AppCompatButton {
         }
 
         @Override
-        public void onTick(long millisUntilFinished) {
-        }
-
+        public void onTick(long millisUntilFinished) {}
     }
 }

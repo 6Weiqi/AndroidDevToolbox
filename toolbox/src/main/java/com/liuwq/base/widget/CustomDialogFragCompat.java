@@ -14,17 +14,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.liuwq.common.R;
+import com.liuwq.base.R;
 import com.liuwq.common.databinding.FragCustomDialogBinding;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 不自定义布局时使用 Compact 风格的对话框
- * Created by android2 on 2018/3/19.
+ * 不自定义布局时使用 Compact 风格的对话框 Created by android2 on 2018/3/19.
  */
-
 public class CustomDialogFragCompat extends DialogFragment {
 
     public static final String KEY_BOOLEAN_TRANSPARENT = "KEY_BOOLEAN_TRANSPARENT";
@@ -189,7 +187,6 @@ public class CustomDialogFragCompat extends DialogFragment {
         return new Builder();
     }
 
-
     /**
      * @param loadingMsg
      * @return
@@ -202,8 +199,8 @@ public class CustomDialogFragCompat extends DialogFragment {
                 .build();
     }
 
-    public static CustomDialogFragCompat newAlertDialog(String title, String msg,
-                                                        String positiveText) {
+    public static CustomDialogFragCompat newAlertDialog(
+            String title, String msg, String positiveText) {
         return newBuilder()
                 .setAlertDialog(true)
                 .setMsg(msg)
@@ -212,9 +209,8 @@ public class CustomDialogFragCompat extends DialogFragment {
                 .build();
     }
 
-    public static CustomDialogFragCompat newAlertDialog(boolean canceledOnTouchOutside,
-                                                        String title, String msg,
-                                                        String positiveText) {
+    public static CustomDialogFragCompat newAlertDialog(
+            boolean canceledOnTouchOutside, String title, String msg, String positiveText) {
         return newBuilder()
                 .setAlertDialog(true)
                 .setCanceledOnTouchOutside(canceledOnTouchOutside)
@@ -250,26 +246,26 @@ public class CustomDialogFragCompat extends DialogFragment {
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
-        mBinding = DataBindingUtil.inflate(inflater, R.layout.frag_custom_dialog, container,
-                false);
-//        mBinding =
-//                FragCustomDialogBinding.inflate(inflater, container, false);
+    public View onCreateView(
+            LayoutInflater inflater,
+            @Nullable ViewGroup container,
+            @Nullable Bundle savedInstanceState) {
+        mBinding = DataBindingUtil.inflate(inflater, R.layout.frag_custom_dialog, container, false);
+        //        mBinding =
+        //                FragCustomDialogBinding.inflate(inflater, container, false);
         int layoutRes = getArguments().getInt(KEY_INT_LAYOUT_RES);
         mBinding.vsDialog.getViewStub().setLayoutResource(layoutRes);
         mBinding.vsDialog.getViewStub().inflate();
-//        mBinding.vsDialog.setOnInflateListener(new ViewStub.OnInflateListener() {
-//            @Override
-//            public void onInflate(ViewStub stub, View inflated) {
-//                String msg = getContext().getString(R.string.loading);
-//                msg = getArguments().getString(KEY_STRING_MSG, msg);
-//                mBinding.setLoadingMsg(msg);
-//            }
-//        });
+        //        mBinding.vsDialog.setOnInflateListener(new ViewStub.OnInflateListener() {
+        //            @Override
+        //            public void onInflate(ViewStub stub, View inflated) {
+        //                String msg = getContext().getString(R.string.loading);
+        //                msg = getArguments().getString(KEY_STRING_MSG, msg);
+        //                mBinding.setLoadingMsg(msg);
+        //            }
+        //        });
         return mBinding.getRoot();
     }
-
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -284,17 +280,12 @@ public class CustomDialogFragCompat extends DialogFragment {
 
         String positiveTxt = getArguments().getString(KEY_STRING_POSITIVE_TEXT);
         String negativeTxt = getArguments().getString(KEY_STRING_NEGATIVE_TEXT);
-        builder.setPositiveText(positiveTxt)
-                .setNegativeText(negativeTxt);
+        builder.setPositiveText(positiveTxt).setNegativeText(negativeTxt);
         builder.setDialog(getDialog());
         if (getActivity() instanceof DialogInterface.OnClickListener) {
-            builder.setOnClickListener(
-                    (DialogInterface.OnClickListener) getActivity()
-            );
+            builder.setOnClickListener((DialogInterface.OnClickListener) getActivity());
         } else if (getTargetFragment() instanceof DialogInterface.OnClickListener) {
-            builder.setOnClickListener(
-                    (DialogInterface.OnClickListener) getTargetFragment()
-            );
+            builder.setOnClickListener((DialogInterface.OnClickListener) getTargetFragment());
         } else {
             builder.setOnClickListener(null);
         }
@@ -318,21 +309,21 @@ public class CustomDialogFragCompat extends DialogFragment {
             String msg = getArguments().getString(KEY_STRING_MSG);
             String positiveText = getArguments().getString(KEY_STRING_POSITIVE_TEXT);
             String negativeText = getArguments().getString(KEY_STRING_NEGATIVE_TEXT);
-            AlertDialog.Builder builder = new AlertDialog.Builder(getContext()).setTitle(title)
-                    .setMessage(msg);
+            AlertDialog.Builder builder =
+                    new AlertDialog.Builder(getContext()).setTitle(title).setMessage(msg);
             if (getActivity() instanceof DialogInterface.OnClickListener) {
-                builder.setPositiveButton(positiveText,
-                        (DialogInterface.OnClickListener) getActivity())
-                        .setNegativeButton(negativeText,
-                                (DialogInterface.OnClickListener) getActivity());
+                builder.setPositiveButton(
+                        positiveText, (DialogInterface.OnClickListener) getActivity())
+                        .setNegativeButton(
+                                negativeText, (DialogInterface.OnClickListener) getActivity());
             } else if (getTargetFragment() instanceof DialogInterface.OnClickListener) {
-                builder.setPositiveButton(positiveText,
-                        (DialogInterface.OnClickListener) getTargetFragment())
-                        .setNegativeButton(negativeText,
+                builder.setPositiveButton(
+                        positiveText, (DialogInterface.OnClickListener) getTargetFragment())
+                        .setNegativeButton(
+                                negativeText,
                                 (DialogInterface.OnClickListener) getTargetFragment());
             } else {
-                builder.setPositiveButton(positiveText, null)
-                        .setNegativeButton(negativeText, null);
+                builder.setPositiveButton(positiveText, null).setNegativeButton(negativeText, null);
             }
             return builder.create();
         } else {

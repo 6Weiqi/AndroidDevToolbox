@@ -2,7 +2,8 @@ package com.liuwq.base.image;
 
 import android.support.annotation.DrawableRes;
 
-import com.liuwq.common.R;
+import com.liuwq.base.R;
+
 
 /**
  * 图片加载选项
