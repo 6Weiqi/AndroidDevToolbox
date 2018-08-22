@@ -1,0 +1,80 @@
+apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'com.jfrog.bintray'
+// jitpack 仓库配置
+group = 'com.github.6Weiqi'
+group = GROUP
+version = gradle.versionName
+install {
+    repositories.mavenInstaller {
+        // 生成pom.xml和参数
+        pom {
+            project {
+                packaging POM_PACKAGING
+                name POM_NAME
+                description POM_DESCRIPTION
+                url POM_URL
+
+                licenses {
+                    license {
+                        name POM_LICENCE_NAME
+                        url POM_LICENCE_URL
+                    }
+                }
+
+                developers {
+                    developer {
+                        id POM_DEVELOPER_ID
+                        name POM_DEVELOPER_NAME
+                        email POM_DEVELOPER_EMAIL
+                    }
+                }
+
+                scm {
+                    connection POM_SCM_CONNECTION // Git仓库地址。
+                    developerConnection POM_SCM_DEV_CONNECTION // Git仓库地址。
+                    url POM_SCM_URL // 项目主页。
+                }
+            }
+        }
+    }
+}
+
+// 生成jar包的task，不需要修改。
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+// 生成jarDoc的task，不需要修改。
+task javadoc(type: Javadoc) {
+    source = android.sourceSets.main.java.srcDirs
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+    // destinationDir = file("../javadoc/")
+    failOnError false // 忽略注释语法错误，如果用jdk1.8你的注释写的不规范就编译不过。
+}
+// 生成javaDoc的jar，不需要修改。
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+artifacts {
+    archives javadocJar
+    archives sourcesJar
+}
+
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+bintray {
+    user = properties.getProperty("bintray.user")
+    key = properties.getProperty("bintray.apikey")
+
+    configurations = ['archives']
+    pkg {
+        repo = BINTRAY_PKG_REPO
+        name = BINTRAY_PKG_NAME
+//        userOrg = 'bintray_user' // Bintray的用户名，2016年11月更新。
+        websiteUrl = BINTRAY_PKG_WEBSITE_URL
+        vcsUrl = BINTRAY_PKG_VCS_URL
+        licenses = [BINTRAY_PKG_LICENSES]
+        publish = BINTRAY_PKG_PUBLISH // 是否是公开项目。
+    }
+}

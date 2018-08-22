@@ -4,12 +4,11 @@ import android.support.annotation.DrawableRes;
 
 import com.liuwq.base.R;
 
-
 /**
  * 图片加载选项
- * Created by Administrator on 2017/11/27.
+ *
+ * <p>Created by Administrator on 2017/11/27.
  */
-
 public class ImgLoaderOption {
 
     /**
@@ -17,6 +16,7 @@ public class ImgLoaderOption {
      */
     @DrawableRes
     private int fallback = R.drawable.ic_placeholder_image_error;
+
     @DrawableRes
     private int error = R.drawable.ic_placeholder_image_error;
     @DrawableRes
@@ -38,17 +38,12 @@ public class ImgLoaderOption {
         this.imgSize = imgSize;
     }
 
-
-    /**
-     * @return default {@link R.color#disable}
-     */
+    /** @return default {@link R.color#disable} */
     public int getPlaceholder() {
         return placeholder;
     }
 
-    /**
-     * @return default {@link R.drawable#ic_placeholder_image_error}
-     */
+    /** @return default {@link R.drawable#ic_placeholder_image_error} */
     public int getError() {
         return error;
     }
@@ -70,7 +65,6 @@ public class ImgLoaderOption {
             this.width = width;
             this.height = height;
         }
-
     }
 
     public static class Builder {
