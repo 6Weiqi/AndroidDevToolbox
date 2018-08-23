@@ -2,7 +2,7 @@ include ':toolbox', ':sample'
 
 gradle.ext.supportLibraryVersion = '26.1.0'
 gradle.ext.archComponentsVersion = '1.1.1'
-gradle.ext.roomVersion = '1.1.0-rc1'
+gradle.ext.roomVersion = '1.1.1'
 //The specified Android SDK Build Tools version (26.0.3) is ignored,
 // as it is below the minimum supported version (27.0.3) for Android Gradle Plugin 3.1.0.
 //Android SDK Build Tools 27.0.3 will be used.
@@ -12,6 +12,6 @@ gradle.ext.roomVersion = '1.1.0-rc1'
 gradle.ext.compileSdkVersion = 26
 gradle.ext.targetSdkVersion = 26
 gradle.ext.minSdkVersion = 15
-gradle.ext.versionCode = 4
-gradle.ext.versionName = "0.0.4"
+gradle.ext.versionCode = 5
+gradle.ext.versionName = "0.0.5"
 gradle.ext.resourcePrefix = "toolbox_"

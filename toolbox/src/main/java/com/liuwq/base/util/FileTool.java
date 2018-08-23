@@ -22,8 +22,7 @@ public class FileTool {
             return null;
         }
         //        dir = Environment.getExternalStorageDirectory();
-        File dir = Environment.getExternalStoragePublicDirectory
-                (Environment.DIRECTORY_PICTURES);
+        File dir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
         File file = new File(dir, dirName);
         if (file.isFile()) {
             file.delete();
@@ -85,9 +84,9 @@ public class FileTool {
     /**
      * SD卡容量是否还有可用容量 ( 基数为 40MB )
      *
-     * @return 作者:fighter <br />
-     * 创建时间:2013-4-16<br />
-     * 修改时间:<br />
+     * @return 作者:fighter <br>
+     *     创建时间:2013-4-16<br>
+     *     修改时间:<br>
      */
     public static boolean isExternalStorageRemaining() {
         long volume = getExternalStorageSpace();
@@ -102,18 +101,16 @@ public class FileTool {
     /**
      * SD卡是否可用
      *
-     * @return 作者:fighter <br />
-     * 创建时间:2013-5-6<br />
-     * 修改时间:<br />
+     * @return 作者:fighter <br>
+     *     创建时间:2013-5-6<br>
+     *     修改时间:<br>
      */
     public static boolean isExternalStorageMounted() {
-        return android.os.Environment.MEDIA_MOUNTED
-                .equals(android.os.Environment.getExternalStorageState());
+        return android.os.Environment.MEDIA_MOUNTED.equals(
+                android.os.Environment.getExternalStorageState());
     }
 
-    /**
-     * 删除 {@code file} 目录下所有文件或者删除 {@code file} 文件
-     */
+    /** 删除 {@code file} 目录下所有文件或者删除 {@code file} 文件 */
     public static boolean deleteFile(File file) {
         boolean delSuccess = true;
         try {
@@ -189,11 +186,11 @@ public class FileTool {
     /**
      * 文件重命名
      *
-     * @param file    要重命名的文件
+     * @param file 要重命名的文件
      * @param newName 新的名字
-     * @return 作者:fighter <br />
-     * 创建时间:2013-3-4<br />
-     * 修改时间:<br />
+     * @return 作者:fighter <br>
+     *     创建时间:2013-3-4<br>
+     *     修改时间:<br>
      */
     public static boolean renameFile(File file, String newName) {
         return file.renameTo(new File(file.getParentFile(), newName));
@@ -202,15 +199,14 @@ public class FileTool {
     /**
      * SD卡可用容量
      *
-     * @return 字节数。 -1 SD card 读取空间错误! 作者:fighter <br />
-     * 创建时间:2013-3-4<br />
-     * 修改时间:<br />
+     * @return 字节数。 -1 SD card 读取空间错误! 作者:fighter <br>
+     *     创建时间:2013-3-4<br>
+     *     修改时间:<br>
      */
     public static long getExternalStorageSpace() {
         try {
             StatFs statFs = new StatFs(getExternalDirectory());
-            return (long) statFs.getBlockSize()
-                    * (long) statFs.getAvailableBlocks();
+            return (long) statFs.getBlockSize() * (long) statFs.getAvailableBlocks();
         } catch (Exception e) {
             e.printStackTrace();
             return -1;
@@ -218,15 +214,15 @@ public class FileTool {
     }
 
     public static String getExternalDirectory() {
-        return Environment.getExternalStorageDirectory()
-                .getAbsolutePath();
+        return Environment.getExternalStorageDirectory().getAbsolutePath();
     }
 
     public static Uri getUriForFile(File file, @NonNull Context context) {
         Uri uri;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            uri = FileProvider.getUriForFile(context,
-                    context.getPackageName() + ".fileProvider", file);
+            uri =
+                    FileProvider.getUriForFile(
+                            context, context.getPackageName() + ".fileProvider", file);
         } else {
             uri = Uri.fromFile(file);
         }

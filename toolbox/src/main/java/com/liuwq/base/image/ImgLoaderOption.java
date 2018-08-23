@@ -11,16 +11,11 @@ import com.liuwq.base.R;
  */
 public class ImgLoaderOption {
 
-    /**
-     * Sets a resource to display if the model provided to RequestBuilder.load(Object) is null.
-     */
-    @DrawableRes
-    private int fallback = R.drawable.ic_placeholder_image_error;
+    /** Sets a resource to display if the model provided to RequestBuilder.load(Object) is null. */
+    @DrawableRes private int fallback = R.drawable.ic_placeholder_image_error;
 
-    @DrawableRes
-    private int error = R.drawable.ic_placeholder_image_error;
-    @DrawableRes
-    private int placeholder = R.color.disable;
+    @DrawableRes private int error = R.drawable.ic_placeholder_image_error;
+    @DrawableRes private int placeholder = R.color.disable;
 
     private ImgSize imgSize;
 

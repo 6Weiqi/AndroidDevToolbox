@@ -15,14 +15,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.liuwq.base.R;
-import com.liuwq.common.databinding.FragCustomDialogBinding;
+import com.liuwq.base.databinding.FragCustomDialogBinding;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * 不自定义布局时使用 Compact 风格的对话框 Created by android2 on 2018/3/19.
- */
+/** 不自定义布局时使用 Compact 风格的对话框 Created by android2 on 2018/3/19. */
 public class CustomDialogFragCompat extends DialogFragment {
 
     public static final String KEY_BOOLEAN_TRANSPARENT = "KEY_BOOLEAN_TRANSPARENT";
@@ -90,8 +88,7 @@ public class CustomDialogFragCompat extends DialogFragment {
             this.dialog = dialog;
         }
 
-        @LayoutRes
-        private int layoutRes = R.layout.stub_loading_dialog;
+        @LayoutRes private int layoutRes = R.layout.stub_loading_dialog;
 
         public String getTitle() {
             return title;
@@ -313,12 +310,12 @@ public class CustomDialogFragCompat extends DialogFragment {
                     new AlertDialog.Builder(getContext()).setTitle(title).setMessage(msg);
             if (getActivity() instanceof DialogInterface.OnClickListener) {
                 builder.setPositiveButton(
-                        positiveText, (DialogInterface.OnClickListener) getActivity())
+                                positiveText, (DialogInterface.OnClickListener) getActivity())
                         .setNegativeButton(
                                 negativeText, (DialogInterface.OnClickListener) getActivity());
             } else if (getTargetFragment() instanceof DialogInterface.OnClickListener) {
                 builder.setPositiveButton(
-                        positiveText, (DialogInterface.OnClickListener) getTargetFragment())
+                                positiveText, (DialogInterface.OnClickListener) getTargetFragment())
                         .setNegativeButton(
                                 negativeText,
                                 (DialogInterface.OnClickListener) getTargetFragment());
