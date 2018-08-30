@@ -20,8 +20,7 @@ public class TextDescTool {
         int day = calendar.get(Calendar.DAY_OF_MONTH);
 
         StringBuffer buffer = new StringBuffer();
-        buffer.append(year).append("年").append(month + 1).append("月")
-                .append(day).append("日");
+        buffer.append(year).append("年").append(month + 1).append("月").append(day).append("日");
 
         return buffer.toString();
     }
@@ -30,9 +29,9 @@ public class TextDescTool {
      * 保留一位小数点
      *
      * @param f
-     * @return 作者:fighter <br />
-     * 创建时间:2013-6-13<br />
-     * 修改时间:<br />
+     * @return 作者:fighter <br>
+     *     创建时间:2013-6-13<br>
+     *     修改时间:<br>
      */
     public static String floatMac1(float f) {
         DecimalFormat decimalFormat = new DecimalFormat("####.#");
@@ -57,9 +56,9 @@ public class TextDescTool {
      * 获取几天以前的秒数
      *
      * @param day
-     * @return 作者:fighter <br />
-     * 创建时间:2013-6-7<br />
-     * 修改时间:<br />
+     * @return 作者:fighter <br>
+     *     创建时间:2013-6-7<br>
+     *     修改时间:<br>
      */
     public static String dayBefore(float day) {
         // Calendar calendar = Calendar.getInstance();
@@ -68,7 +67,6 @@ public class TextDescTool {
         long time = (long) (60 * 60 * 24 * day);
 
         return time + "";
-
     }
 
     public static Calendar getCalendar(String birthDate) {
@@ -116,9 +114,9 @@ public class TextDescTool {
      * 出生日期转换为年龄
      *
      * @param birthDate
-     * @return 作者:fighter <br />
-     * 创建时间:2013-3-26<br />
-     * 修改时间:<br />
+     * @return 作者:fighter <br>
+     *     创建时间:2013-3-26<br>
+     *     修改时间:<br>
      */
     public static int dateToAge(String birthDate) {
         if (TextUtils.isEmpty(birthDate)) {
@@ -128,8 +126,12 @@ public class TextDescTool {
         try {
             Calendar cal = Calendar.getInstance();
             String birth = birthDate;
-            String now = (cal.get(Calendar.YEAR) + "/"
-                    + cal.get(Calendar.MONTH) + "/" + cal.get(Calendar.DATE));
+            String now =
+                    (cal.get(Calendar.YEAR)
+                            + "/"
+                            + cal.get(Calendar.MONTH)
+                            + "/"
+                            + cal.get(Calendar.DATE));
             Date d1 = new Date(birth); // 出生日期d1
             Date d2 = new Date(now); // 当前日期d2
             long i = (d2.getTime() - d1.getTime()) / (1000 * 60 * 60 * 24);
@@ -150,8 +152,12 @@ public class TextDescTool {
         try {
             Calendar cal = Calendar.getInstance();
             SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
-            String now = (cal.get(Calendar.YEAR) + "/"
-                    + cal.get(Calendar.MONTH) + "/" + cal.get(Calendar.DATE));
+            String now =
+                    (cal.get(Calendar.YEAR)
+                            + "/"
+                            + cal.get(Calendar.MONTH)
+                            + "/"
+                            + cal.get(Calendar.DATE));
             Date d1 = format.parse(birthDate);
             Date d2 = new Date(now); // 当前日期d2
             long i = (d2.getTime() - d1.getTime()) / (1000 * 60 * 60 * 24);
@@ -165,7 +171,6 @@ public class TextDescTool {
 
         return age;
     }
-
 
     public static String timeDifference(long time) {
         Calendar calendar = Calendar.getInstance();
@@ -198,8 +203,7 @@ public class TextDescTool {
             Date curDate = null;
             try {
                 try {
-                    curDate = new SimpleDateFormat("yyyyMMddHHmmss")
-                            .parse(currTime);
+                    curDate = new SimpleDateFormat("yyyyMMddHHmmss").parse(currTime);
                 } catch (java.text.ParseException e) {
                     e.printStackTrace();
                 }
@@ -213,10 +217,8 @@ public class TextDescTool {
             } catch (Exception e) {
             }
             return timeDifference(calendar);
-
         }
         return "";
-
     }
 
     public static String timeDifference(String currTime) {
@@ -234,16 +236,15 @@ public class TextDescTool {
      * 判断时间与当前时间的差距， 给予字符提示.
      *
      * @param calendar
-     * @return 作者:fighter <br />
-     * 创建时间:2013-4-9<br />
-     * 修改时间:<br />
+     * @return 作者:fighter <br>
+     *     创建时间:2013-4-9<br>
+     *     修改时间:<br>
      */
     public static String timeDifference(Calendar calendar) {
         String info;
         Calendar currCalendar = Calendar.getInstance();
         final String isSame = isSameDay(calendar, currCalendar);
-        long second = (currCalendar.getTimeInMillis() - calendar
-                .getTimeInMillis()) / 1000;
+        long second = (currCalendar.getTimeInMillis() - calendar.getTimeInMillis()) / 1000;
         int index = 0;
         if (second < (60 * 60)) {
             index = 60;
@@ -253,9 +254,7 @@ public class TextDescTool {
             index = (24 * 60 * 60);
         }
         info = second(second, index, 1);
-        if ((info.contains("分钟前") || info.contains("小时前"))
-                && "很久以前".equals(isSame))
-            return "1天前";
+        if ((info.contains("分钟前") || info.contains("小时前")) && "很久以前".equals(isSame)) return "1天前";
         return info;
     }
 
@@ -263,8 +262,7 @@ public class TextDescTool {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         final String date1 = format.format(calendar.getTime());
         final String date2 = format.format(curCalendar.getTime());
-        if (!date1.equals(date2))
-            return "很久以前";
+        if (!date1.equals(date2)) return "很久以前";
         return "";
     }
 
@@ -281,8 +279,7 @@ public class TextDescTool {
         }
 
         if (second < index * num) {
-            if (second < 60)
-                return "刚刚";
+            if (second < 60) return "刚刚";
             return num + info;
         } else {
             return second(second, index, ++num);

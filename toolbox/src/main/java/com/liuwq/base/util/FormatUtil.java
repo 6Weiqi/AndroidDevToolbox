@@ -19,7 +19,6 @@ public class FormatUtil {
     public static final String YYYY_MM_DD_HH_MM = "yyyy-MM-dd HH:mm";
     public static final String YYYY_MM_DD = "yyyy-MM-dd";
 
-
     public static String longToDate(String time, String pattern) {
         SimpleDateFormat format = new SimpleDateFormat(pattern);
         String tempTime = String.format("%-13s", time);
@@ -51,12 +50,11 @@ public class FormatUtil {
         return format.format(new Date());
     }
 
-    public static String getDate2(String pattern1, String pattern2,
-                                  String time) {
+    public static String getDate2(String pattern1, String pattern2, String time) {
         // SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm",
         // Locale.ENGLISH);
 
-//		SimpleDateFormat format = new SimpleDateFormat(pattern1, Locale.CHINA);
+        //		SimpleDateFormat format = new SimpleDateFormat(pattern1, Locale.CHINA);
         // Date d = format.parse(time);
         SimpleDateFormat format = new SimpleDateFormat(pattern2);
         return format.format(Long.parseLong(time));
@@ -80,8 +78,7 @@ public class FormatUtil {
         try {
             long longtime = Long.parseLong(time);
             Date curDate = new Date(longtime);
-            String curDateString = new SimpleDateFormat(YYYY_MM_DD)
-                    .format(curDate);
+            String curDateString = new SimpleDateFormat(YYYY_MM_DD).format(curDate);
             return curDateString;
         } catch (Exception e) {
             e.printStackTrace();
@@ -153,8 +150,7 @@ public class FormatUtil {
      * @param desFormat
      * @return
      */
-    public static String transform(String dateStr, String srcFormat,
-                                   String desFormat) {
+    public static String transform(String dateStr, String srcFormat, String desFormat) {
         SimpleDateFormat sdf = new SimpleDateFormat(srcFormat);
         try {
             Date date = sdf.parse(dateStr);
@@ -165,8 +161,8 @@ public class FormatUtil {
         }
     }
 
-    /***
-     * 获取 url 指定 name 的 value;
+    /**
+     * * 获取 url 指定 name 的 value;
      *
      * @param url
      * @param name
@@ -217,8 +213,7 @@ public class FormatUtil {
         StringBuilder stringBuilder = new StringBuilder();
         Formatter mFormatter = new Formatter(stringBuilder, Locale.getDefault());
         if (hours > 0) {
-            return mFormatter.format("%d时%02d分%02d秒", hours, minutes, seconds)
-                    .toString();
+            return mFormatter.format("%d时%02d分%02d秒", hours, minutes, seconds).toString();
         } else {
             return mFormatter.format("%02d分%02d秒", minutes, seconds).toString();
         }
@@ -227,7 +222,7 @@ public class FormatUtil {
     /**
      * 格式化单位
      *
-     * @param size  in byte
+     * @param size in byte
      * @param scale {@code scale} 位有效数字
      * @return
      */

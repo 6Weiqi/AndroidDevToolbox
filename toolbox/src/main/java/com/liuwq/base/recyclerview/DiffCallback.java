@@ -9,10 +9,8 @@ import java.util.List;
  * Created by liuwq on 2018/4/3.
  *
  * @see <a href="https://github.com/drakeet/MultiType/issues/56"/>详解</a>
- * <p>
- * <a href="https://blog.csdn.net/zxt0601/article/details/52562770">教程</a>
+ *     <p><a href="https://blog.csdn.net/zxt0601/article/details/52562770">教程</a>
  */
-
 public abstract class DiffCallback<T> extends DiffUtil.Callback {
 
     protected List<T> mOldList, mNewList;
