@@ -3,6 +3,7 @@
     <style name="BaseTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <!--<item name="actionMenuTextColor">@android:color/white</item>-->
     </style>
 
     <style name="like_toast_dialog_style">
@@ -45,7 +46,7 @@
         <item name="android:windowBackground">@color/transparent</item>
     </style>
 
-    <style name="CustomDialog.MinWidth" parent="Theme.AppCompat.Light.Dialog.MinWidth" />
+    <style name="CustomDialog.MinWidth" parent="Theme.AppCompat.Light.Dialog.MinWidth"/>
 
     <style name="textMarquee">
         <item name="android:focusable">true</item>

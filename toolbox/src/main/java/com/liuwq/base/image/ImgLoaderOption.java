@@ -19,6 +19,7 @@ public class ImgLoaderOption {
 
     @DrawableRes
     private int error = R.drawable.ic_placeholder_image_error;
+
     @DrawableRes
     private int placeholder = R.color.disable;
 

@@ -5,7 +5,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 /**
- * 描述: 类 {@code GridView} 分隔线 作者: su 日期: 2017/11/9 18:03
+ * 描述: 类 {@code GridView} 分隔线
+ *
+ * <p>作者: su
+ *
+ * <p>日期: 2017/11/9 18:03
  */
 public class GridItemDecoration extends RecyclerView.ItemDecoration {
 
