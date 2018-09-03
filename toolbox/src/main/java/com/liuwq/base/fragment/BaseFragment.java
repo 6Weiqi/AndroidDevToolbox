@@ -25,14 +25,13 @@ import com.liuwq.base.R;
 
 import org.greenrobot.eventbus.EventBus;
 
-/**
- * 描述: Fragment基类 作者: su 日期: 2017/10/16 18:11
- */
+/** 描述: Fragment基类 作者: su 日期: 2017/10/16 18:11 */
 public abstract class BaseFragment extends Fragment {
     protected View mRootView;
     private boolean mFirstTimeResume = true;
     private ProgressDialog mLoadingDialog;
     private AlertDialog mConfirmDialog;
+    private boolean mViewCreated;
 
     protected abstract View provideContentView(
             LayoutInflater inflater,
@@ -54,6 +53,29 @@ public abstract class BaseFragment extends Fragment {
 
         return mRootView;
     }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        mViewCreated = true;
+        if (getUserVisibleHint()) {
+            onLazyLoadingData();
+        }
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser && mViewCreated) {
+            onLazyLoadingData();
+        }
+    }
+
+    /**
+     * Super class implementation is empty.Works for single fragment and fragments in {@link
+     * android.support.v4.view.ViewPager}.
+     */
+    protected void onLazyLoadingData() {}
 
     @Override
     public void onResume() {
