@@ -1,4 +1,4 @@
-package com.liuwq;
+package com.liuwq.toolbox.sample;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -11,8 +11,6 @@ import android.widget.TextView;
 import com.liuwq.base.fragment.BaseTitleFragment;
 
 public class MainFrag extends BaseTitleFragment {
-
-    private View mFragView;
 
     public static MainFrag newInstance() {
 
@@ -28,14 +26,13 @@ public class MainFrag extends BaseTitleFragment {
             LayoutInflater inflater,
             @Nullable ViewGroup container,
             @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.frag_main, container, false);
+        View view = inflater.inflate(R.layout.frag_test, container, false);
         return view;
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mFragView = view;
     }
 
     @Override

@@ -4,7 +4,7 @@ android {
     compileSdkVersion gradle.compileSdkVersion
 
     defaultConfig {
-        applicationId "com.liuwq"
+        applicationId "com.liuwq.toolbox.sample"
         minSdkVersion gradle.minSdkVersion
         targetSdkVersion gradle.targetSdkVersion
         versionCode 1
@@ -35,4 +35,5 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     implementation project(":toolbox")
+    implementation 'com.jakewharton.timber:timber:4.7.1'
 }

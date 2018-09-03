@@ -38,8 +38,16 @@ public abstract class BaseFragment extends Fragment {
             @Nullable ViewGroup container,
             @Nullable Bundle savedInstanceState);
 
-    /** You can observe something here. */
+    /** Called when instantiated fragment first {@link #onResume()} */
     protected abstract void onInit();
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser && mViewCreated) {
+            onLazyLoadingData();
+        }
+    }
 
     @Nullable
     @Override
@@ -50,30 +58,26 @@ public abstract class BaseFragment extends Fragment {
         if (mRootView == null) {
             mRootView = provideContentView(inflater, container, savedInstanceState);
         }
-
         return mRootView;
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
         mViewCreated = true;
         if (getUserVisibleHint()) {
             onLazyLoadingData();
         }
     }
 
-    @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
-        if (isVisibleToUser && mViewCreated) {
-            onLazyLoadingData();
-        }
-    }
-
     /**
-     * Super class implementation is empty.Works for single fragment and fragments in {@link
-     * android.support.v4.view.ViewPager}.
+     * Super class implementation is empty.It works for single fragment and fragments in {@link
+     * android.support.v4.view.ViewPager}.You can observe data change to trigger UI update here.
      */
     protected void onLazyLoadingData() {}
 
@@ -89,6 +93,12 @@ public abstract class BaseFragment extends Fragment {
                 EventBus.getDefault().register(this);
             }
         }
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        mViewCreated = false;
     }
 
     @Override
