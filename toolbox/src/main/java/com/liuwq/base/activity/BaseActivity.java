@@ -88,23 +88,27 @@ public abstract class BaseActivity extends AppCompatActivity {
 
                                     // 拒绝权限，并点击“不再询问”
                                     //
-                                    // if(permission.shouldShowRequestPermissionRationale){
-                                    //                            }else {
-                                    //                            }
-                                }
+                                    //
+                                    if (permission.shouldShowRequestPermissionRationale) {
+                                        //                            }else {
+                                        //                            }
+                                    }
 
-                                if (index == count) {
-                                    // 所有权限请求完毕
-                                    int countGranted = permissionsGranted.size();
+                                    if (index == count) {
+                                        // 所有权限请求完毕
+                                        int countGranted = permissionsGranted.size();
 
-                                    if (countGranted == count) {
-                                        // 所有权限都成功获取被授予；
-                                        callback.onPermissionGranted(permissionsGranted, true);
-                                    } else if (countGranted == 0) {
-                                        callback.onPermissionDenied(permissionsDenied, true);
-                                    } else {
-                                        callback.onPermissionGranted(permissionsGranted, false);
-                                        callback.onPermissionDenied(permissionsDenied, false);
+                                        if (countGranted == count) {
+                                            // 所有权限都成功获取被授予；
+
+                                            callback.onPermissionGranted(permissionsGranted, true);
+                                        } else if (countGranted == 0) {
+                                            callback.onPermissionDenied(permissionsDenied, true);
+                                        } else {
+
+                                            callback.onPermissionGranted(permissionsGranted, false);
+                                            callback.onPermissionDenied(permissionsDenied, false);
+                                        }
                                     }
                                 }
                             }

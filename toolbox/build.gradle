@@ -58,7 +58,7 @@ dependencies {
     //noinspection GradleDependency
     implementation 'org.greenrobot:eventbus:3.0.0'
     /*permissions*/
-    implementation 'com.tbruyelle.rxpermissions2:rxpermissions:0.9.4@aar'
+    api 'com.github.tbruyelle:rxpermissions:0.10.2'
     /*rx*/
     api 'io.reactivex.rxjava2:rxandroid:2.0.1'
     //noinspection GradleDependency
