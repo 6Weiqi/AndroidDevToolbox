@@ -9,8 +9,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 
+import com.google.common.collect.Lists;
+
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import io.reactivex.Single;
@@ -29,7 +30,7 @@ public abstract class BaseListAdapter<E, ViewHolder extends RecyclerView.ViewHol
         extends RecyclerView.Adapter<ViewHolder> {
 
     private Context mContext;
-    @NonNull private List<E> mDataList = Collections.emptyList();
+    @NonNull private List<E> mDataList = Lists.newArrayList();
     private RecyclerView mRecyclerView;
     private LayoutInflater mLayoutInflater;
     @Nullable protected OnItemClickListener<E> mItemClickListener;
@@ -272,21 +273,26 @@ public abstract class BaseListAdapter<E, ViewHolder extends RecyclerView.ViewHol
         //        }
     }
 
+    /**
+     * @param data
+     * @return -1 if {@code data} not found.
+     */
     public int getDataPosition(@NonNull E data) {
         checkNotNull(data);
         if (isEmpty()) {
             return RecyclerView.NO_POSITION;
         }
 
-        int n = getItemCount();
-        for (int i = 0; i < n; i++) {
-            E entity = getData().get(i);
-            if (entity == data) {
-                return i;
-            }
-        }
-
-        return RecyclerView.NO_POSITION;
+        return mDataList.indexOf(data);
+        //        int n = getItemCount();
+        //        for (int i = 0; i < n; i++) {
+        //            E entity = getData().get(i);
+        //            if (entity == data) {
+        //                return i;
+        //            }
+        //        }
+        //
+        //        return RecyclerView.NO_POSITION;
     }
 
     public boolean isEmpty() {
