@@ -132,8 +132,8 @@ public abstract class BaseListAdapter<E, ViewHolder extends RecyclerView.ViewHol
     }
 
     public void addData(@NonNull List<E> dataList) {
-        addList(dataList);
         int positionStart = mDataList.size();
+        addList(dataList);
         int insertedCount = dataList.size();
         notifyItemRangeInserted(positionStart, insertedCount);
         //        if (dataList.isEmpty()) {
