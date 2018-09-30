@@ -64,7 +64,7 @@ dependencies {
     api 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
     api 'com.squareup.okhttp3:logging-interceptor:3.9.0'
     //noinspection GradleDependency
-    implementation 'org.greenrobot:eventbus:3.0.0'
+    api 'org.greenrobot:eventbus:3.0.0'
     /*permissions*/
     api 'com.github.tbruyelle:rxpermissions:0.10.2'
     /*rx*/

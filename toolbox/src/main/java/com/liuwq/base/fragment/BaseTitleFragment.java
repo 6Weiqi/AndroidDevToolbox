@@ -18,23 +18,20 @@ import android.widget.TextView;
 import com.liuwq.base.R;
 
 /**
+ * <pre>
  * 描述: 带有标题栏fragment基类
  *
- * <p>作者: su
+ * 作者: su
  *
- * <p>日期: 2017/10/17 14:35
+ * 日期: 2017/10/17 14:35
  */
 public abstract class BaseTitleFragment extends BaseFragment {
+
     private static int sDefaultLeftIconRes = R.drawable.ic_arrow_back_white_24dp;
     private View mInflatedTitleView;
 
     private final View.OnClickListener mDefaultLeftIconClickListener =
-            new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    getActivity().onBackPressed();
-                }
-            };
+            v -> requireActivity().onBackPressed();
 
     @Nullable
     @Override
@@ -53,7 +50,7 @@ public abstract class BaseTitleFragment extends BaseFragment {
             View contentView = provideContentView(inflater, container, savedInstanceState);
             if (contentView != null) {
                 frameLayout.addView(
-                        provideContentView(inflater, container, savedInstanceState),
+                        contentView,
                         new FrameLayout.LayoutParams(
                                 ViewGroup.LayoutParams.MATCH_PARENT,
                                 ViewGroup.LayoutParams.MATCH_PARENT));
@@ -64,13 +61,9 @@ public abstract class BaseTitleFragment extends BaseFragment {
                 defToolbar.setTitle("");
                 defToolbar.inflateMenu(R.menu.empty);
                 defToolbar.setOnMenuItemClickListener(
-                        new Toolbar.OnMenuItemClickListener() {
-                            @Override
-                            public boolean onMenuItemClick(MenuItem item) {
-                                return BaseTitleFragment.this.onMenuItemClick(
-                                        item.getItemId(), (String) item.getTitle());
-                            }
-                        });
+                        item ->
+                                BaseTitleFragment.this.onMenuItemClick(
+                                        item.getItemId(), (String) item.getTitle()));
             }
             if (dividerLineLayoutRes() != 0) {
                 stub = mRootView.findViewById(R.id.vs_divider_line);
