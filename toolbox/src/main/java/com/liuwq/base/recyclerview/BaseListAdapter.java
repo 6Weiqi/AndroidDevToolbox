@@ -92,7 +92,9 @@ public abstract class BaseListAdapter<E, ViewHolder extends RecyclerView.ViewHol
 
     protected void setList(@NonNull List<E> list) {
         checkNotNull(list);
-        mDataList = list;
+        //        mDataList = list;
+        mDataList.clear();
+        mDataList.addAll(list);
     }
 
     public void setData(@NonNull final List<E> dataList) {
